@@ -7,43 +7,43 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 
 export default function LoginForm() {
-  const router = useRouter()
+  const router = useRouter();
   const { Title } = Typography;
   const [input, setInput] = useState({
-    email: '',
-    password: ''
-  })
+    email: "",
+    password: "",
+  });
 
   const handleClick = async () => {
     try {
-      const data = await axios.post('http://localhost:3000/api/auth', {
+      const data = await axios.post("http://localhost:3000/api/auth", {
         email: input.email,
-        password: input.password
-      })
+        password: input.password,
+      });
 
-      router.push('/')
+      router.push("/");
     } catch (error) {
       notification.error({
-        message: 'รหัสผ่านไม่ถูกต้อง'
-      })
+        message: "รหัสผ่านไม่ถูกต้อง",
+      });
     }
-  }
+  };
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const { value, name } = event.target
+    const { value, name } = event.target;
 
-    setInput(prev => ({ ...prev, [name]: value}))
-  }
+    setInput((prev) => ({ ...prev, [name]: value }));
+  };
 
   return (
-    <Form className="w-1/3">
+    <Form className="w-1/3 backdrop-opacity-10    bg-white/35 p-20 rounded-lg backdrop-blur-sm shadow-2xl ">
       <Flex vertical gap={30} align="center" className="w-full">
-        <Title>Login cathotel</Title>
+        <Title style={{color:"#714b1c"}}>Login cathotel</Title>
         <Flex vertical gap="small" align="center" className="w-full">
-          <EmailLoginInput name='email' onChange={handleChange}/>
-          <PasswordLoginInput name='password' onChange={handleChange}/>
+          <EmailLoginInput name="email" onChange={handleChange} />
+          <PasswordLoginInput name="password" onChange={handleChange} />
         </Flex>
-        <Button onClick={handleClick} className="w-1/2">
+        <Button onClick={handleClick} size="large" className="w-1/2" type='primary'>
           Login
         </Button>
       </Flex>
